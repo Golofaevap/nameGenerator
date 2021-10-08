@@ -89,8 +89,8 @@ async function main() {
             `Name:      ${row.name}     |          Date of birth:    ${row.birthday}     |          GMAIL:    ${row.gmail}        |          password:    ${row.password}     `
         );
         console.log(`Recovery Email:      ${row.recoveryEmail}  `);
-        console.log( "ADDRES FROM GOOGLE PAY ******************\n\n")
-        console.log( "ADDRES FROM GOOGLE PAY ******************")
+        console.log("ADDRES FROM GOOGLE PAY ******************\n\n");
+        console.log("ADDRES FROM GOOGLE PAY ******************");
 
         console.log(`Fake Address:      ${row.fakeAddress}  `);
 
@@ -99,6 +99,18 @@ async function main() {
             console.log(`  --  ${keys[j]}  +  ${row[keys[j]]}`);
         }
 
+        console.log(`[${Number(i) + 1}] -------------- \n\n`);
+        const forImport = { ...row };
+        const __names = forImport.name.split(" ");
+        forImport.firstName = __names[0];
+        forImport.lastName = __names.length === 2 ? __names[1] : __names.length > 2 ? __names[2] : "";
+        forImport.address = row.fakeAddress;
+        forImport.dob = row.birthday;
+        forImport.lang = "en";
+        forImport.billingCountry = "us";
+        forImport.phone = "+1"+row.phone.replace(/[^0-9]/g, "");
+        console.log(JSON.stringify(forImport));
+        console.log(``);
         console.log(`[${Number(i) + 1}] ===========\n\n`);
     }
 }
